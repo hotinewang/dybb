@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <title>电影伴伴 新片速递</title>
+        <style type="text/css">
+        *{
+            font-family:inherit,"Droid Sans","微软雅黑", serif;
+        }
+        body{
+            background-color:#000000;
+            text-align: center;
+            vertical-align: top;
+        }
+        div{
+            margin:0px;
+            padding:0px;
+            border:0px;
+        }
+        a{
+            text-decoration: none;
+            color: #111111;
+        }
+        .movieItem{
+            /*class*/
+            width: 40%;
+            min-width: 350px;
+            max-width: 380px;
+            height: 300px;
+            /*line-height:40px;*/
+            /*float:left;*/
+            display: inline-block;
+            background-color:#eeeeee;
+            border:10px solid #eeeeee;
+            margin: 5px;
+            vertical-align: top;
+            text-align: left;
+            overflow: hidden;
+        }
+        .moviePostImg{
+            width:150px;
+            height:212px;
+            margin-right: 10px;
+            margin-bottom: 2px;
+            float:left;
+        }
+        #calendar{
+            /*id*/
+            width:385px;
+            }
+        </style>
+        <script>
+            function init()
+            {
+                //alert('onload');
+            }
+        </script>
+    </head>
+    <body onLoad="init()">
+        <div id="intro" class="movieItem" style="background-color:#000000;border-color:#000000;text-align: center;vertical-align: center;">
+            <span style="font-size:85px; color:rgb(236, 185, 104)">电影伴伴新片速递</span><br />
+            <span style="font-size:14px; color:#7a7a7a">更新日期：#更新日期#</span><br />
+            <span style="font-size:14px; color:#7a7a7a"><b><a href="http://dytt8.net" target="_blank" style="color:#7a7a7a">更多新片下载...</a></b></span>&nbsp;&nbsp;&nbsp;
+            <span style="font-size:14px; color:#7a7a7a"><b><a href="http://www.kkkob.com" target="_blank" style="color:#7a7a7a">电影网盘搜索...</a></b></span>
+            <br />
+            <span style="font-size:14px; color:#555555">i 本网页由NODEJS爬虫程序生成</span>
+        </div>
+        <!---模板片段开始-->
+        <div id="template" class="movieItem" >
+            <a  href="#下载地址#"  target="_blank" >
+                <img class="moviePostImg" src="#海报链接#" alt="点击下载" onerror="this.src='default_post.png';this.onerror=null;" />
+                <span><big><big><b>#电影名#</b></big></big></span><br />
+                <span><b>年份:</b>#年份#</span><br />
+                <span><b>国家:</b>#国家#</span><br />
+                <span><b>评分:</b>#评分#</span><br />
+                <span><b>类型:</b>#类型#</span><br />
+                <span><b>简介:</b>#简介#</span>
+            </a>
+        </div>
+        <!---模板片段结束-->
+        <div id="intro" class="movieItem" style="text-align: center;vertical-align: center;">
+            <span style="font-size:90px; color:rgb(79, 100, 106)">没有啦</span><br /><br /><br /><br /><br /><br /><br /><br />
+            <span style="font-size:14px; color:#4a4a4a"><a href="https://github.com/hotinewang/MovieBanban" style="color:#4a4a4a">get 爬虫代码 on GitHub</a></span><br /><br />
+            
+        </div>
+    </body>
+</html>
