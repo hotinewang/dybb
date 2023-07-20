@@ -1,0 +1,7 @@
+代码如果需要自动执行，需要forever进程守护
+
+全局安装
+npm install forever -g
+
+定位到app.js所在文件夹后，开启进程守护
+forever start app.js

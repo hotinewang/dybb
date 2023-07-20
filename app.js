@@ -10,9 +10,11 @@ const htmlTemplatePath='index_t.html'
 const savePath='index.html'
 const maxtxtlen=150  //像网页中输出的电影简介的最大字符数
 const maxMovies =100  //最多读取的电影数
-var movielisturl='https://dytt8.net/index2.htm'
-var moviepageurl='https://dytt8.net/'
+var movielisturl='https://www.dydytt.net'
+var moviepageurl='https://www.dydytt.net'
 var errorTimes=0
+
+var debugMode=false
 
 
 class MovieInfo
@@ -104,7 +106,8 @@ function _parseURLListPage(d)
             console.log('获取电影列表数量为0，页面信息异常：'+d.data)
             console.log('尝试第二次读取电影列表。')
             errorTimes++
-            movielisturl='https://www.dydytt.net/index2.htm'
+            //修改为备用网址
+            movielisturl='https://www.dydytt.net/index.htm'
             moviepageurl='https://www.dydytt.net/'
             loadPage(movielisturl,true,'gb2312').then(_parseURLListPage,_loadErr)
             return
@@ -267,14 +270,21 @@ function onAllInfoGetted()
 }
 
 
-//只执行一次脚本
-//loadPage(movielisturl,true,'gb2312').then(_parseURLListPage,_loadErr)
+if(debugMode)
+{
+    //只执行一次脚本
+    loadPage(movielisturl,true,'gb2312').then(_parseURLListPage,_loadErr);
+}
+else
+{
+    //自动执行脚本
+    var schedule = require('node-schedule')
+    //var rule = new schedule.RecurrenceRule()
+    //rule.minute = [0,10,21,30,40,50]
+    //rule.second = [0]
+    var run = schedule.scheduleJob('0 0/10 * * * *', function(){
+        loadPage(movielisturl,true,'gb2312').then(_parseURLListPage,_loadErr)
+    })
+}
 
-//自动执行脚本
-var schedule = require('node-schedule')
-//var rule = new schedule.RecurrenceRule()
-//rule.minute = [0,10,21,30,40,50]
-//rule.second = [0]
-var run = schedule.scheduleJob('0 0/10 * * * *', function(){
-    loadPage(movielisturl,true,'gb2312').then(_parseURLListPage,_loadErr)
-   })
+
