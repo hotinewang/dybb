@@ -14,7 +14,7 @@ var movielisturl='https://www.dydytt.net'
 var moviepageurl='https://www.dydytt.net'
 var errorTimes=0
 
-var debugMode=false
+var debugMode=true
 
 
 class MovieInfo
