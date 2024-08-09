@@ -161,7 +161,6 @@ function _getMovieInfo(s)
         info.stars = strRemoveAll(info.stars,['◎豆瓣评分','◎IMDb评分',' ','/','　'])
         info.plot = (d('#Zoom').html().match(RegExp('◎简　　介.+?<a')) || ept)[0]  //◎简　　介.+?<a
         info.plot = strRemoveAll(info.plot,['◎简　　介','<a','   ','  ','<br />','<br>','<br','　'])
-        
         info.posturl = d('#Zoom img').attr('src')
         info.downloadurl = (d('#Zoom').html().match(RegExp('magnet:.*?"')) || ept)[0]  //magnet:.*?"
         info.downloadurl = strRemoveAll(info.downloadurl,['"',' '])
