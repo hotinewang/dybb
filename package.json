@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "bufferhelper": "^0.2.1",
-    "cheerio": "^1.0.0-rc.12",
+    "cheerio": "^1.0.0",
     "iconv-lite": "^0.6.3",
     "node-schedule": "^2.1.1"
   }

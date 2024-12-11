@@ -1,3 +1,8 @@
+/**
+ * 本脚本从电影天堂自动获取最新发布的99部电影信息
+ * 并根据模板文件index_t.html生成一个名为index.html的静态电影海报墙网页。
+ * v2024-12-11
+*/
 const { time } = require('console')
 const { config } = require('process')
 
@@ -10,10 +15,15 @@ const htmlTemplatePath='index_t.html'
 const savePath='index.html'
 const maxtxtlen=150  //像网页中输出的电影简介的最大字符数
 const maxMovies =100  //最多读取的电影数
-var movielisturl='https://www.dydytt.net'
-var moviepageurl='https://www.dydytt.net'
+var movielisturl='https://www.dydytt.net/index.htm' //带有100部电影列表的网页地址
+var moviepageurl='https://www.dydytt.net/' //电影详细介绍页的网址前缀
+var movielisturl2='https://www.dydytt.net/index.htm' //带有100部电影列表的网页地址（备用地址）
+var moviepageurl2='https://www.dydytt.net/' //电影详细介绍页的网址前缀（备用地址）
+
 var errorTimes=0
 
+
+//不要忘记修改这里！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 var debugMode=true
 
 
@@ -107,8 +117,8 @@ function _parseURLListPage(d)
             console.log('尝试第二次读取电影列表。')
             errorTimes++
             //修改为备用网址
-            movielisturl='https://www.dydytt.net/index.htm'
-            moviepageurl='https://www.dydytt.net/'
+            movielisturl=movielisturl2
+            moviepageurl=moviepageurl2
             loadPage(movielisturl,true,'gb2312').then(_parseURLListPage,_loadErr)
             return
         }else{
@@ -158,9 +168,16 @@ function _getMovieInfo(s)
         info.stars = (d('#Zoom').html().match(RegExp('◎豆瓣评分.+?/')) || ept)[0] //REG:  ◎豆瓣评分.+?/    或   ◎IMDb评分.+?/ 
         if(info.stars == ept[0]){info.stars = (d('#Zoom').html().match(RegExp('◎IMDb评分.+?/')) || ept)[0]}  //没有豆瓣评分就尝试找到IMDb评分
         if(info.stars == ept[0]){info.stars='暂无评分'}
-        info.stars = strRemoveAll(info.stars,['◎豆瓣评分','◎IMDb评分',' ','/','　'])
+        info.stars = strRemoveAll(info.stars, ['◎豆瓣评分', '◎IMDb评分', ' ', '/', '　','&nbsp;'])
         info.plot = (d('#Zoom').html().match(RegExp('◎简　　介.+?<a')) || ept)[0]  //◎简　　介.+?<a
-        info.plot = strRemoveAll(info.plot,['◎简　　介','<a','   ','  ','<br />','<br>','<br','　'])
+        //info.plot = strRemoveAll(info.plot, ['◎简　　介', '<a', '   ', '  ', '<br />', '<br>', '<br', '　'])
+        info.plot = strRemoveAll(info.plot, ['◎简　　介', '<a', '   ', '  ', '　'])
+        
+        //移除简介中的html标签
+        let tempHtml = require('cheerio').load(info.plot);
+        tempHtml('style').remove();
+        info.plot = tempHtml('body').text();
+
         info.posturl = d('#Zoom img').attr('src')
         info.downloadurl = (d('#Zoom').html().match(RegExp('magnet:.*?"')) || ept)[0]  //magnet:.*?"
         info.downloadurl = strRemoveAll(info.downloadurl,['"',' '])
