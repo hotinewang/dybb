@@ -1,6 +1,11 @@
 /**
  * 本脚本从电影天堂自动获取最新发布的99部电影信息
  * 并根据模板文件index_t.html生成一个名为index.html的静态电影海报墙网页。
+ * 定位到脚本目录下安装执行：
+ * npm install node-schedule
+ * npm install bufferhelper
+ * npm install cheerio
+ * 
  * v2024-12-11
 */
 const { time } = require('console')
@@ -24,7 +29,7 @@ var errorTimes=0
 
 
 //不要忘记修改这里！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
-var debugMode=true
+var debugMode=false
 
 
 class MovieInfo

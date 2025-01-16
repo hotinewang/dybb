@@ -2,6 +2,7 @@
  * 本脚本从电影天堂自动获取最新发布的19部电影信息，并读取top20movie.json的19部电影名称，进行对比
  * 新增的电影（限5部，可通过maxMsg设置）通过ntfy.sh推送话题为xxx（通过msgTopic设置）的通知
  * 从ntfy客户端或者https://ntfy.sh/app 订阅对应的话题即可接收通知
+ * 可在青龙面板设置CRON定期执行
  * v2024-12-11
 */
 const { time } = require('console')
